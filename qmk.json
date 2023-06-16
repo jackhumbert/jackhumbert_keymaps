@@ -1,13 +1,16 @@
 {
     "type": "user",
-    "qmk_version": "../mnt_reform_qmk_firmware",
+    "qmk_version": "0.20.10",
     "dependencies": {
-        "olkb": "1.0.0",
-        "olkb_local": "../olkb_keyboards"
+        "olkb":  {
+            "version": "1.0.0",
+            "devices": [
+                "planck/rev7"
+            ]
+        }
     },
     "keymaps": {
         "olkb/planck": "planck",
-        "olkb_local/planck": "planck",
         "planck": "planck"
     }
 }
