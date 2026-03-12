@@ -1,4 +1,4 @@
-/* Copyright 2015-2020 Jack Humbert
+/* Copyright 2015-2026 Jack Humbert
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,6 +24,10 @@ enum planck_layers {
   _RAISE,
   _NAV,
   _ADJUST
+};
+
+enum planck_keycodes {
+  JK_GRV = SAFE_RANGE
 };
 
 #define S_SFT LM(_SHIFT_COLEMAK, MOD_LSFT)
@@ -65,7 +69,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [_SHIFT_COLEMAK] = LAYOUT_ortho_4x12(
     S(KC_TAB), S(KC_Q), S(KC_W), S(KC_F), S(KC_P), S(KC_G), S(KC_J), S(KC_L), S(KC_U), S(KC_Y), KC_COLN,  _______,
-    S(KC_MINS), S(KC_A), S(KC_R), S(KC_S), S(KC_T), S(KC_D), S(KC_H), S(KC_N), S(KC_E), S(KC_I), S(KC_O),  KC_GRV,
+    S(KC_MINS), S(KC_A), S(KC_R), S(KC_S), S(KC_T), S(KC_D), S(KC_H), S(KC_N), S(KC_E), S(KC_I), S(KC_O),  JK_GRV,
     S(KC_ESC), S(KC_Z), S(KC_X), S(KC_C), S(KC_V), S(KC_B), S(KC_K), S(KC_M), KC_EXLM, KC_AT, KC_QUES,  _______,
     _______,   _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
 ),
@@ -165,4 +169,23 @@ bool music_mask_user(uint16_t keycode) {
     default:
       return true;
   }
+}
+
+static uint8_t grv_mods = 0;
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+  switch (keycode) {
+    case JK_GRV: 
+      if (record->event.pressed) {
+        grv_mods = get_mods();
+        set_mods(grv_mods & ~(MOD_LSFT));
+        register_code(KC_GRV);
+      } else {
+        unregister_code(KC_GRV);
+        set_mods(grv_mods);
+      }
+      return false;
+      break;
+  }
+  return true;
 }
