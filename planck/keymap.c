@@ -171,18 +171,16 @@ bool music_mask_user(uint16_t keycode) {
   }
 }
 
-static uint8_t grv_mods = 0;
-
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
     case JK_GRV: 
       if (record->event.pressed) {
-        grv_mods = get_mods();
-        set_mods(grv_mods & ~(MOD_LSFT));
+        del_mods(MOD_MASK_SHIFT);
+        del_weak_mods(MOD_MASK_SHIFT);
+        send_keyboard_report();
         register_code(KC_GRV);
       } else {
         unregister_code(KC_GRV);
-        set_mods(grv_mods);
       }
       return false;
       break;
