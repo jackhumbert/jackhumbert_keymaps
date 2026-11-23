@@ -2,15 +2,18 @@
     "type": "user",
     "qmk_version": "0.20.10",
     "dependencies": {
-        "olkb":  {
+        "olkb": {
             "version": "1.0.0",
             "devices": [
-                "planck/rev7"
+                "planck/rev7",
+                "preonic/rev4"
             ]
         }
     },
     "keymaps": {
         "olkb/planck": "planck",
-        "planck": "planck"
+        "planck": "planck",
+        "olkb/preonic": "preonic",
+        "preonic": "preonic"
     }
 }

@@ -1,0 +1,226 @@
+/* Copyright 2015-2026 Jack Humbert
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+#include QMK_KEYBOARD_H
+
+
+enum preonic_layers {
+  _COLEMAK,
+  _SHIFT_COLEMAK,
+  _LOWER,
+  _RAISE,
+  _NAV,
+  _ADJUST
+};
+
+enum preonic_keycodes {
+  JK_GRV = SAFE_RANGE
+};
+
+#define S_SFT LM(_SHIFT_COLEMAK, MOD_LSFT)
+#define LOWER MO(_LOWER)
+#define RAISE MO(_RAISE)
+#define NAV MO(_NAV)
+
+const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
+
+
+/* Colemak
+ * ,-----------------------------------------------------------------------------------.
+ * |   1  |   2  |   3  |   4  |   5  |   6  |   7  |   8  |   9  |   0  |   =  | Bksp |
+ * |------+------+------+------+------+------+------+------+------+------+------+------|
+ * | Tab  |   q  |   w  |   f  |   p  |   g  |   j  |   l  |   u  |   y  |   ;  | Bksp |
+ * |------+------+------+------+------+------+------+------+------+------+------+------|
+ * | -    |   a  |   r  |   s  |   t  |   d  |   h  |   n  |   e  |   i  |   o  |  '   |
+ * |------+------+------+------+------+------+------+------+------+------+------+------|
+ * | Esc  |   z  |   x  |   c  |   v  |   b  |   k  |   m  |   ,  |   .  |   /  |Enter |
+ * |------+------+------+------+------+------+------+------+------+------+------+------|
+ * | Shft | GUI  | Alt  | Ctrl |Lower | Shft | Spc  |Raise | Nav  | Ctrl |  Alt | GUI  |
+ * `-----------------------------------------------------------------------------------'
+ */
+[_COLEMAK] = LAYOUT_preonic_default(
+    KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_EQL,  KC_BSPC,
+    KC_TAB,  KC_Q,    KC_W,    KC_F,    KC_P,    KC_G,    KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN, KC_BSPC,
+    KC_MINS, KC_A,    KC_R,    KC_S,    KC_T,    KC_D,    KC_H,    KC_N,    KC_E,    KC_I,    KC_O,    KC_QUOT,
+    KC_ESC,  KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_K,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_ENT ,
+    KC_LSFT, KC_LGUI, KC_LALT, KC_LCTL, LOWER,   S_SFT,   KC_SPC,  RAISE,   NAV,     KC_RCTL, KC_RALT, KC_RGUI
+),
+
+/* Colemak, Shifted
+ * ,-----------------------------------------------------------------------------------.
+ * |   !  |   @  |   #  |   $  |   %  |   ^  |   &  |   *  |   (  |   )  |   +  |      |
+ * |------+------+------+------+------+------+------+------+------+------+------+------|
+ * | Tab  |   Q  |   W  |   F  |   P  |   G  |   J  |   L  |   U  |   Y  |   ;  |      |
+ * |------+------+------+------+------+------+------+------+------+------+------+------|
+ * |  _   |   A  |   R  |   S  |   T  |   D  |   H  |   N  |   E  |   I  |   O  |  `   |
+ * |------+------+------+------+------+------+------+------+------+------+------+------|
+ * | Esc  |   Z  |   X  |   C  |   V  |   B  |   K  |   M  |   !  |   @  |   ?  |      |
+ * |------+------+------+------+------+------+------+------+------+------+------+------|
+ * |      |      |      |      |      |      |      |      |      |      |      |      |
+ * `-----------------------------------------------------------------------------------'
+ */
+[_SHIFT_COLEMAK] = LAYOUT_preonic_default(
+    S(KC_1), S(KC_2), S(KC_3), S(KC_4), S(KC_5), S(KC_6), S(KC_7), S(KC_8), S(KC_9), S(KC_0), KC_PLUS,  _______,
+    S(KC_TAB), S(KC_Q), S(KC_W), S(KC_F), S(KC_P), S(KC_G), S(KC_J), S(KC_L), S(KC_U), S(KC_Y), KC_COLN,  _______,
+    S(KC_MINS), S(KC_A), S(KC_R), S(KC_S), S(KC_T), S(KC_D), S(KC_H), S(KC_N), S(KC_E), S(KC_I), S(KC_O),  JK_GRV,
+    S(KC_ESC), S(KC_Z), S(KC_X), S(KC_C), S(KC_V), S(KC_B), S(KC_K), S(KC_M), KC_EXLM, KC_AT, KC_QUES,  _______,
+    _______,   _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
+),
+
+
+/* Lower
+ * ,-----------------------------------------------------------------------------------.
+ * |      |      |      |      |      |      |      |      |      |      |      |      |
+ * |------+------+------+------+------+------+------+------+------+------+------+------|
+ * |      |      |   7  |   8  |   9  |      |  Del |  F9  |  F10 |  F11 |  F12 |      |
+ * |------+------+------+------+------+------+------+------+------+------+------+------|
+ * | Del  |      |   4  |   5  |   6  |      |      |  F5  |  F6  |  F7  |  F8  |      |
+ * |------+------+------+------+------+------+------+------+------+------+------+------|
+ * |      |   0  |   1  |   2  |   3  |      |      |  F1  |  F2  |  F3  |  F4  |      |
+ * |------+------+------+------+------+------+------+------+------+------+------+------|
+ * |      |      |      |      |      |      |      |      |      |      |      |      |
+ * `-----------------------------------------------------------------------------------'
+ */
+[_LOWER] = LAYOUT_preonic_default(
+    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
+    _______, XXXXXXX, KC_7,    KC_8,    KC_9,    XXXXXXX, KC_DEL,  KC_F9,   KC_F10,  KC_F11,  KC_F12,  _______,
+    KC_DEL,  XXXXXXX, KC_4,    KC_5,    KC_6,    XXXXXXX, XXXXXXX, KC_F5,   KC_F6,   KC_F7,   KC_F8,   _______,
+    _______, KC_0,    KC_1,    KC_2,    KC_3,    XXXXXXX, XXXXXXX, KC_F1,   KC_F2,   KC_F3,   KC_F4,   _______,
+    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
+),
+
+/* Raise
+ * ,-----------------------------------------------------------------------------------.
+ * |      |      |      |      |      |      |      |      |      |      |      |      |
+ * |------+------+------+------+------+------+------+------+------+------+------+------|
+ * |      |      |   <  |   $  |   >  |      |      |   [  |   _  |   ]  |      |      |
+ * |------+------+------+------+------+------+------+------+------+------+------+------|
+ * |      |   \  |   (  |   "  |   )  |   #  |   %  |   {  |   =  |   }  |   |  |      |
+ * |------+------+------+------+------+------+------+------+------+------+------+------|
+ * |      |      |   :  |   *  |   +  |      |      |   &  |   ^  |   ~  |      |      |
+ * |------+------+------+------+------+------+------+------+------+------+------+------|
+ * |      |      |      |      |      |      |      |      | Next | Vol- | Vol+ | Play |
+ * `-----------------------------------------------------------------------------------'
+ */
+[_RAISE] = LAYOUT_preonic_default(
+    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
+    _______, XXXXXXX, KC_LT,   KC_DLR,  KC_GT,   XXXXXXX, XXXXXXX, KC_LBRC, KC_UNDS, KC_RBRC, XXXXXXX, _______,
+    _______, KC_BSLS, KC_LPRN, KC_DQUO, KC_RPRN, KC_HASH, KC_PERC, KC_LCBR, KC_EQL,  KC_RCBR, KC_PIPE, _______,
+    _______, XXXXXXX, KC_COLN, KC_ASTR, KC_PLUS, XXXXXXX, XXXXXXX, KC_AMPR, KC_CIRC, KC_TILD, XXXXXXX, _______,
+    _______, _______, _______, _______, _______, _______, _______, _______, KC_MNXT, KC_VOLD, KC_VOLU, KC_MPLY
+),
+
+/* Navigation
+ */
+[_NAV] = LAYOUT_preonic_default(
+    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
+    _______, _______, _______, _______, _______, _______, _______, KC_HOME, KC_PGDN, KC_PGUP, KC_END,  _______,
+    _______, _______, _______, _______, _______, _______, _______, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, _______,
+    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
+    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
+),
+
+/* Adjust (Lower + Raise)
+ * ,-----------------------------------------------------------------------------------.
+ * |      |      |      |      |      |      |      |      |      |      |      |      |
+ * |------+------+------+------+------+------+------+------+------+------+------+------|
+ * |      | Reset|Debug |      |      |      |      |      |      |      |      |      |
+ * |------+------+------+------+------+------+------+------+------+------+------+------|
+ * |      |      |MUSmod|Aud on|Audoff|AGnorm|AGswap|      |      |      |      |      |
+ * |------+------+------+------+------+------+------+------+------+------+------+------|
+ * |      |Voice-|Voice+|Mus on|Musoff|MIDIon|MIDIof|      |      |      |      |      |
+ * |------+------+------+------+------+------+------+------+------+------+------+------|
+ * |      |      |      |      |      |      |      |      |      |      |      |      |
+ * `-----------------------------------------------------------------------------------'
+ */
+[_ADJUST] = LAYOUT_preonic_default(
+    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
+    _______, QK_BOOT, DB_TOGG, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______,
+    _______, XXXXXXX, MU_NEXT, AU_ON,   AU_OFF,  AG_NORM, AG_SWAP, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______,
+    _______, AU_PREV, AU_NEXT, MU_ON,   MU_OFF,  MI_ON,   MI_OFF,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______,
+    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
+)
+
+};
+
+layer_state_t layer_state_set_user(layer_state_t state) {
+  return update_tri_layer_state(state, _LOWER, _RAISE, _ADJUST);
+};
+
+#ifdef ENCODER_MAP_ENABLE
+// Every encoder scrolls by page on the base layer, like the Planck.
+#define PAGE_SCROLL ENCODER_CCW_CW(KC_PGUP, KC_PGDN)
+#define ENC_TRNS    ENCODER_CCW_CW(_______, _______)
+#define ALL_ENCODERS(e) { e, e, e, e, e, e, e, e, e, e }
+
+const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
+  [_COLEMAK]       = ALL_ENCODERS(PAGE_SCROLL),
+  [_SHIFT_COLEMAK] = ALL_ENCODERS(ENC_TRNS),
+  [_LOWER]         = ALL_ENCODERS(ENC_TRNS),
+  [_RAISE]         = ALL_ENCODERS(ENC_TRNS),
+  [_NAV]           = ALL_ENCODERS(ENC_TRNS),
+  [_ADJUST]        = ALL_ENCODERS(ENC_TRNS)
+};
+#endif
+
+bool dip_switch_update_user(uint8_t index, bool active) {
+  switch (index) {
+    case 0:
+      if (active) {
+        layer_on(_ADJUST);
+      } else {
+        layer_off(_ADJUST);
+      }
+      break;
+#ifdef RGB_MATRIX_ENABLE
+    case 1:
+      if (active) {
+        rgb_matrix_enable_noeeprom();
+      } else {
+        rgb_matrix_disable_noeeprom();
+      }
+      break;
+#endif
+  }
+  return true;
+}
+
+bool music_mask_user(uint16_t keycode) {
+  switch (keycode) {
+    case RAISE:
+    case LOWER:
+      return false;
+    default:
+      return true;
+  }
+}
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+  switch (keycode) {
+    case JK_GRV:
+      if (record->event.pressed) {
+        del_mods(MOD_MASK_SHIFT);
+        del_weak_mods(MOD_MASK_SHIFT);
+        send_keyboard_report();
+        register_code(KC_GRV);
+      } else {
+        unregister_code(KC_GRV);
+      }
+      return false;
+      break;
+  }
+  return true;
+}
