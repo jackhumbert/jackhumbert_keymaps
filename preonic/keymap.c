@@ -40,7 +40,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 /* Colemak
  * ,-----------------------------------------------------------------------------------.
- * |   1  |   2  |   3  |   4  |   5  |   6  |   7  |   8  |   9  |   0  |   =  | Bksp |
+ * |   `  |   1  |   2  |   3  |   4  |   5  |   6  |   7  |   8  |   9  |   0  | Bksp |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * | Tab  |   q  |   w  |   f  |   p  |   g  |   j  |   l  |   u  |   y  |   ;  | Del  |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
@@ -52,7 +52,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `-----------------------------------------------------------------------------------'
  */
 [_COLEMAK] = LAYOUT_preonic_default(
-    KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_EQL,  KC_BSPC,
+    KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_BSPC,
     KC_TAB,  KC_Q,    KC_W,    KC_F,    KC_P,    KC_G,    KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN, KC_DEL, 
     KC_MINS, KC_A,    KC_R,    KC_S,    KC_T,    KC_D,    KC_H,    KC_N,    KC_E,    KC_I,    KC_O,    KC_QUOT,
     KC_ESC,  KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_K,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_ENT ,
@@ -61,7 +61,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 /* Colemak, Shifted
  * ,-----------------------------------------------------------------------------------.
- * |   !  |   @  |   #  |   $  |   %  |   ^  |   &  |   *  |   (  |   )  |   +  |      |
+ * |   ~  |   !  |   @  |   #  |   $  |   %  |   ^  |   &  |   *  |   (  |   )  |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * | Tab  |   Q  |   W  |   F  |   P  |   G  |   J  |   L  |   U  |   Y  |   ;  |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
@@ -73,7 +73,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `-----------------------------------------------------------------------------------'
  */
 [_SHIFT_COLEMAK] = LAYOUT_preonic_default(
-    S(KC_1), S(KC_2), S(KC_3), S(KC_4), S(KC_5), S(KC_6), S(KC_7), S(KC_8), S(KC_9), S(KC_0), KC_PLUS,  _______,
+    KC_TILD, S(KC_1), S(KC_2), S(KC_3), S(KC_4), S(KC_5), S(KC_6), S(KC_7), S(KC_8), S(KC_9), S(KC_0),  _______,
     S(KC_TAB), S(KC_Q), S(KC_W), S(KC_F), S(KC_P), S(KC_G), S(KC_J), S(KC_L), S(KC_U), S(KC_Y), KC_COLN,  _______,
     S(KC_MINS), S(KC_A), S(KC_R), S(KC_S), S(KC_T), S(KC_D), S(KC_H), S(KC_N), S(KC_E), S(KC_I), S(KC_O),  JK_GRV,
     S(KC_ESC), S(KC_Z), S(KC_X), S(KC_C), S(KC_V), S(KC_B), S(KC_K), S(KC_M), KC_EXLM, KC_AT, KC_QUES,  _______,
